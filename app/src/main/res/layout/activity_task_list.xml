@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/greypoor2"
+    tools:context=".TaskList">
+
+    <!-- This page show the tasks (at this point are dammy data)
+          and it show how it can show the tasks to the user, in the
+          case that the user click on any task it will show a dialog to edit or delete
+          the task. On the edit option app it will navigate the user on another page to give
+          the abilityt to update the task etc. -->
+
+    <!-- Relative layout that it has the header on top -->
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <View
+            android:id="@+id/background_top_header"
+            android:layout_width="match_parent"
+            android:layout_height="131dp"
+            android:background="@drawable/register_header_corners" />
+
+    </RelativeLayout>
+
+    <!--  This layoun hold the main body of this page as
+          it has include the listview with the task and the add button
+          that the use can add a new task etc.-->
+    <RelativeLayout
+        android:layout_width="700dp"
+        android:layout_height="700dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/reg_form_corner"
+        android:padding="10dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/linearLayout2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                tools:ignore="MissingConstraints">
+
+                <TextView
+                    android:id="@+id/tv_register"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="@string/lbllisttask"
+                    android:textColor="@color/regtxtcolor"
+                    android:textSize="30sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="485dp"
+                android:orientation="vertical"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+
+                <ListView
+                    android:id="@+id/item_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:entries="@array/tasks"
+                   />
+            </LinearLayout>
+            <Button
+                android:id="@+id/btn_add_tasks"
+                android:layout_width="45dp"
+                android:layout_height="43dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/btnaddtask"
+                android:text="+"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintVertical_bias="1.0"
+                android:textSize="30sp"
+                android:textAlignment="center"
+                android:textColor="@color/white"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

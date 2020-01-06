@@ -1,0 +1,39 @@
+<resources>
+
+    <!-- this xml file holds all the resources like strings and items
+         that have been used for the app -->
+    <array name="tasks">
+        <item>Trip to LA</item>
+        <item>Gym</item>
+        <item>Coding</item>
+        <item>Colleagues Meeting</item>
+        <item>Market</item>
+        <item>Trip to LA</item>
+        <item>Gym</item>
+        <item>Coding</item>
+        <item>Colleagues Meeting</item>
+        <item>Market</item>
+        <item>Market</item>
+        <item>Trip to LA</item>
+        <item>Gym</item>
+        <item>Market</item>
+        <item>Trip to LA</item>
+        <item>Gym</item>
+    </array>
+
+    <string name="app_name">uGotThis</string>
+    <string name="lblLogin">Login</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="btnLogin">LOGIN</string>
+    <string name="linkBtnSingUp">YOU DONT HAVE AN ACCOUNT? PLEASE SIGN UP </string>
+    <string name="linkBtnForgotPass">Forgot Password?</string>
+    <string name="lblcreateaccount">Create an account</string>
+    <string name="lblfullname">Full Name</string>
+    <string name="lblconfirmpass">Confirm Password</string>
+    <string name="btnreg">Register</string>
+    <string name="btngobackhome">Return to log in page</string>
+    <string name="lbleditpage">Edit Activity</string>
+    <string name="btnupdate">Update Activity</string>
+    <string name="lbllisttask">List of Tasks</string>
+</resources>

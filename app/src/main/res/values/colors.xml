@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- this xml file holds all the color that
+        have been used for the app -->
+    <color name="colorPrimary">#23A7DB</color>
+    <color name="colorPrimaryDark">#23A7DB</color>
+    <color name="colorAccent">#FFFFFF</color>
+
+    <color name="white">#FFFFFF</color>
+    <color name="transparent">#00000000</color>
+    <color name="gradientStart">#19AA8B</color>
+    <color name="gradientStop">#23A7DB</color>
+    <color name="black">#000000</color>
+    <color name="greypoor">#f5f5f5</color>
+    <color name="greypoor2">#d6d6d6</color>
+    <color name="regtxtcolor">#455a64</color>
+
+</resources>

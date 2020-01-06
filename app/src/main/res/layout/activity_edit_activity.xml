@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/greypoor2"
+    tools:context=".TaskList">
+
+    <!-- The app navigate the user on this page when the user want to edit
+         any task-->
+
+    <!-- Relative layout that it has the header on top -->
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <View
+            android:id="@+id/background_top_header"
+            android:layout_width="match_parent"
+            android:layout_height="131dp"
+            android:background="@drawable/register_header_corners" />
+
+    </RelativeLayout>
+
+    <!--  This layout hold the main body of this page as
+          it has include the text boxes that the user can
+          add the new data and update the task-->
+    <RelativeLayout
+        android:layout_width="700dp"
+        android:layout_height="700dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/reg_form_corner"
+        android:padding="10dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/linearLayout2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                tools:ignore="MissingConstraints">
+
+                <TextView
+                    android:id="@+id/tv_register"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="@string/lbleditpage"
+                    android:textColor="@color/regtxtcolor"
+                    android:textSize="30sp" />
+
+            </LinearLayout>
+
+            <!-- This linear layout has on it the text boxes and the button for the task update -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:hint="Title"
+                    android:gravity="center"
+                    android:layout_height="150dp"
+                    android:layout_marginTop="80dp"
+                    android:textSize="15sp"
+                    android:textColor="@color/black"
+                    android:fontFamily="sans-serif-light"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"
+                    android:background="@drawable/reg_txt_corners"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:drawableEnd="@drawable/list_items_edit_icon"/>
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:hint="Content"
+                    android:gravity="center"
+                    android:layout_height="150dp"
+                    android:layout_marginTop="30dp"
+                    android:textSize="15sp"
+                    android:textColor="@color/black"
+                    android:fontFamily="sans-serif-light"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"
+                    android:background="@drawable/reg_txt_corners"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:drawableEnd="@drawable/list_items_edit_icon"/>
+
+                <Button
+                    android:id="@+id/btnupdate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="30dp"
+                    android:background="@drawable/btn_reg"
+                    android:fontFamily="sans-serif-medium"
+                    android:paddingLeft="80dp"
+                    android:paddingRight="80dp"
+                    android:text="@string/btnupdate"
+                    android:textAllCaps="false"
+                    android:textColor="@color/regtxtcolor"
+                    android:textSize="19sp"
+                    android:layout_gravity="center"/>
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

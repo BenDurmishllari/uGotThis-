@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Register_activity"
+    android:background="@color/greypoor2"
+    android:orientation="vertical">
+
+
+    <!-- This page is the register page and it show the form that the user need
+         fill to create an account -->
+
+    <!-- Relative layout that it has the header on top -->
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <View
+            android:id="@+id/background_top_header"
+            android:layout_width="match_parent"
+            android:layout_height="131dp"
+            android:background="@drawable/register_header_corners" />
+
+        <!-- This layout hold the main body of the screen center that it has include on the
+             label and text box components of the registration form -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="30dp"
+            android:layout_marginTop="80dp"
+            android:background="@drawable/reg_form_corner"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/tv_register"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="sans-serif-medium"
+                android:text="@string/lblcreateaccount"
+                android:textColor="@color/regtxtcolor"
+                android:textSize="30sp"
+                android:layout_gravity="center_horizontal"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-light"
+                android:text="@string/lblfullname"
+                android:textAllCaps="true"
+                android:textColor="@color/regtxtcolor"
+                android:textSize="15sp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"/>
+
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="5dp"
+                android:textSize="15sp"
+                android:textColor="@color/black"
+                android:fontFamily="sans-serif-light"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:background="@drawable/reg_txt_corners"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:drawableEnd="@drawable/fullname_icon_24dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-light"
+                android:text="@string/email"
+                android:textAllCaps="true"
+                android:textColor="@color/regtxtcolor"
+                android:textSize="15sp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="5dp"
+                android:textSize="15sp"
+                android:textColor="@color/black"
+                android:fontFamily="sans-serif-light"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:background="@drawable/reg_txt_corners"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:drawableEnd="@drawable/reg_email_icon_24dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-light"
+                android:text="@string/password"
+                android:textAllCaps="true"
+                android:textColor="@color/regtxtcolor"
+                android:textSize="15sp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="5dp"
+                android:textSize="15sp"
+                android:textColor="@color/black"
+                android:fontFamily="sans-serif-light"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:background="@drawable/reg_txt_corners"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:drawableEnd="@drawable/reg_pass_icon_24dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-light"
+                android:text="@string/lblconfirmpass"
+                android:textAllCaps="true"
+                android:textColor="@color/regtxtcolor"
+                android:textSize="15sp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="5dp"
+                android:textSize="15sp"
+                android:textColor="@color/black"
+                android:fontFamily="sans-serif-light"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:background="@drawable/reg_txt_corners"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:drawableEnd="@drawable/regist_confirm_pass_icon"/>
+
+            <!-- Relative layout that it has into in the registration button -->
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal">
+
+                <Button
+                    android:id="@+id/registerbtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="40dp"
+                    android:background="@drawable/btn_reg"
+                    android:fontFamily="sans-serif-medium"
+                    android:paddingLeft="80dp"
+                    android:paddingRight="80dp"
+                    android:text="@string/btnreg"
+                    android:textAllCaps="false"
+                    android:textColor="@color/regtxtcolor"
+                    android:textSize="19sp" />
+
+
+            </RelativeLayout>
+
+            <!-- This layout has on it the return log in page link to navigate the user
+                 on the log in page in the case that the user has already
+                 and accidentally click to navigate on this page, this layout is not
+                 on the same part of the above linear as we want it to give an individual manage-->
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginRight="80dp"
+                android:layout_marginTop="40dp">
+
+
+
+                <Button
+                    android:id="@+id/linkbtngohomepage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/transparent"
+                    android:drawableStart="@drawable/btn_homepage_icon_24dp"
+                    android:fontFamily="sans-serif"
+                    android:text="@string/btngobackhome"
+                    android:textAllCaps="true"
+                    android:textColor="@color/regtxtcolor" />
+            </RelativeLayout>
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+</RelativeLayout>
