@@ -59,6 +59,7 @@
 
 
             <EditText
+                android:id="@+id/txtCreateAccountUsername"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginTop="5dp"
@@ -84,6 +85,7 @@
                 android:layout_marginTop="20dp"/>
 
             <EditText
+                android:id="@+id/txtCreateAccountEmail"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginTop="5dp"
@@ -109,6 +111,7 @@
                 android:layout_marginTop="20dp"/>
 
             <EditText
+                android:id="@+id/txtCreateAccountPassword"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginTop="5dp"
