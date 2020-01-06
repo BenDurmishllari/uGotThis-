@@ -12,10 +12,16 @@ import android.view.ViewGroup;
 import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.AdapterView;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 
@@ -29,11 +35,45 @@ public class TaskList extends AppCompatActivity {
     private ArrayAdapter adapter;
     Intent editpage;
 
+    private Button btnLogout;
+    private Button btnCreateTask;
+
+    // Firebase attributes
+    private FirebaseAuth firebaseAuth;
+    private FirebaseAuth.AuthStateListener authStateListener;
+    private FirebaseUser currentUser;
+
+    // database collection
+    private FirebaseFirestore database = FirebaseFirestore.getInstance();
+    private CollectionReference collectionReference = database.collection("Users");
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task_list);
+
+        btnCreateTask = findViewById(R.id.btn_add_tasks);
+        btnCreateTask.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                startActivity(new Intent(TaskList.this, CreateTask_activity.class));
+            }
+        });
+
+        btnLogout = findViewById(R.id.btnLogout);
+        btnLogout.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                FirebaseAuth.getInstance().signOut();
+                startActivity(new Intent(TaskList.this, LogIn_activity.class));
+                finish();
+            }
+        });
 
 
         listview = findViewById(R.id.item_list);

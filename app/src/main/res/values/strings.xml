@@ -36,4 +36,8 @@
     <string name="lbleditpage">Edit Activity</string>
     <string name="btnupdate">Update Activity</string>
     <string name="lbllisttask">List of Tasks</string>
+    <string name="lblcreateTask">Create Task</string>
+    <string name="task_title">Task Title</string>
+    <string name="task_description">Task Description</string>
+    <string name="save_task">Save Task</string>
 </resources>

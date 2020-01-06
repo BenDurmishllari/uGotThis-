@@ -14,7 +14,14 @@
           the abilityt to update the task etc. -->
 
     <!-- Relative layout that it has the header on top -->
-    <RelativeLayout
+    <Button
+        android:id="@+id/btnLogout"
+        android:layout_width="38dp"
+        android:layout_height="38dp"
+        android:layout_marginLeft="350dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/exit_app" />
+        <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
         <View

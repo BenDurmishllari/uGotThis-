@@ -37,7 +37,6 @@ public class LogIn_activity extends AppCompatActivity {
     Intent taskList;
     TextView signUp;
 
-
     Button btnLogin;
 
     private EditText txtEmail;
@@ -103,18 +102,6 @@ public class LogIn_activity extends AppCompatActivity {
             }
         });
 
-
-
-
-//        login = findViewById(R.id.btnlogin);
-//        login.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                taskList = new Intent(getApplicationContext(), TaskList.class);
-//                startActivity(taskList);
-//            }
-//        });
-
     }
 
     private void loginEmailPasswordUser (String email, String password)
@@ -126,7 +113,7 @@ public class LogIn_activity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task)
                 {
-                    FirebaseUser user = firebaseAuth.getCurrentUser();
+                    final FirebaseUser user = firebaseAuth.getCurrentUser();
                     assert user != null;
                     String currentUserId = user.getUid();
 
@@ -150,8 +137,8 @@ public class LogIn_activity extends AppCompatActivity {
                                     taskApi.setUserId(snapshot.getString("userId"));
 
                                     startActivity(new Intent(LogIn_activity.this, TaskList.class));
+                                    Toast.makeText(LogIn_activity.this, "Welcome"+ " " + taskApi.getUsername(), Toast.LENGTH_SHORT).show();
                                     finish();
-
                                 }
                             }
                         }
