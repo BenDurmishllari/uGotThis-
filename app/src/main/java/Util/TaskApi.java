@@ -4,8 +4,9 @@ import android.app.Application;
 
 public class TaskApi extends Application {
 
-    private String username;
-    private String userId;
+    private String username,
+                   userId;
+
     private static TaskApi instance;
 
     public static TaskApi getInstance()

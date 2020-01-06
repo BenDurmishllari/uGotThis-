@@ -71,16 +71,6 @@ public class Register_activity extends AppCompatActivity {
             }
         });
 
-//        btnRegister = findViewById(R.id.registerbtn);
-//
-//        btnRegister.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v)
-//            {
-//                loginhome = new Intent(getApplicationContext(), LogIn_activity.class);
-//                startActivity(loginhome);
-//            }
-//        });
 
         // instantiate the firebaseAuth
         firebaseAuth = FirebaseAuth.getInstance();
