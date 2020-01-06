@@ -29,7 +29,7 @@
     <string name="linkBtnSingUp">YOU DONT HAVE AN ACCOUNT? PLEASE SIGN UP </string>
     <string name="linkBtnForgotPass">Forgot Password?</string>
     <string name="lblcreateaccount">Create an account</string>
-    <string name="lblfullname">Full Name</string>
+    <string name="lblusername">Username</string>
     <string name="lblconfirmpass">Confirm Password</string>
     <string name="btnreg">Register</string>
     <string name="btngobackhome">Return to log in page</string>

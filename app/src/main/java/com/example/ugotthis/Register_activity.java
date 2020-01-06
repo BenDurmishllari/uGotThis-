@@ -8,12 +8,25 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 public class Register_activity extends AppCompatActivity {
 
     TextView gobackhome;
     Intent loginpage;
-    Button btnloginpage;
+    Button btnRegister;
     Intent loginhome;
+
+    // Firebase attributes
+    private FirebaseAuth firebaseAuth;
+    private  FirebaseAuth.AuthStateListener authStateListener;
+    private FirebaseUser currentUser;
+
+    // Firestore connection
+    private FirebaseFirestore database = FirebaseFirestore.getInstance();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,9 +44,9 @@ public class Register_activity extends AppCompatActivity {
             }
         });
 
-        btnloginpage = findViewById(R.id.registerbtn);
+        btnRegister = findViewById(R.id.registerbtn);
 
-        btnloginpage.setOnClickListener(new View.OnClickListener() {
+        btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
             {
