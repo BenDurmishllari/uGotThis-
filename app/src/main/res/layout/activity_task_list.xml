@@ -76,13 +76,19 @@
                 android:orientation="vertical"
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
 
-                <ListView
-                    android:id="@+id/item_list"
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+                <TextView
+                    android:id="@+id/list_for_Tasks_View"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:entries="@array/tasks"
-                   />
+                    android:text="Nothing to Show here at the moment"
+                    android:visibility="invisible" />
+
             </LinearLayout>
+
             <Button
                 android:id="@+id/btn_add_tasks"
                 android:layout_width="45dp"
@@ -91,14 +97,14 @@
                 android:layout_marginBottom="16dp"
                 android:background="@drawable/btnaddtask"
                 android:text="+"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="30sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintVertical_bias="1.0"
-                android:textSize="30sp"
-                android:textAlignment="center"
-                android:textColor="@color/white"/>
+                app:layout_constraintVertical_bias="1.0" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

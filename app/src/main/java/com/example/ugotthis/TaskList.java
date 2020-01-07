@@ -76,32 +76,32 @@ public class TaskList extends AppCompatActivity {
         });
 
 
-        listview = findViewById(R.id.item_list);
-        arraylist = new ArrayList<String>();
-
-        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
-            {
-                final int current_item = position;
-                new AlertDialog.Builder(TaskList.this)
-                                        .setIcon(android.R.drawable.ic_menu_edit)
-                                        .setTitle("Do to you edit this?")
-                                        .setMessage("Are you sure")
-                                        .setPositiveButton(Html.fromHtml("<font color = '#0083FF'> Edit </font>"),
-                                                            new DialogInterface.OnClickListener() {
-                                            @Override
-                                            public void onClick(DialogInterface dialog, int which)
-                                            {
-                                                editpage = new Intent(getApplicationContext(), Edit_activity.class);
-                                                startActivity(editpage);
-                                            }
-                                        })
-                                        .setNegativeButton(Html.fromHtml("<font color = '#ff0000'> Delete </font>") , null)
-                                        .show();
-            }
-        });
+//        listview = findViewById(R.id.item_list);
+//        arraylist = new ArrayList<String>();
+//
+//        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+//            {
+//                final int current_item = position;
+//                new AlertDialog.Builder(TaskList.this)
+//                                        .setIcon(android.R.drawable.ic_menu_edit)
+//                                        .setTitle("Do to you edit this?")
+//                                        .setMessage("Are you sure")
+//                                        .setPositiveButton(Html.fromHtml("<font color = '#0083FF'> Edit </font>"),
+//                                                            new DialogInterface.OnClickListener() {
+//                                            @Override
+//                                            public void onClick(DialogInterface dialog, int which)
+//                                            {
+//                                                editpage = new Intent(getApplicationContext(), Edit_activity.class);
+//                                                startActivity(editpage);
+//                                            }
+//                                        })
+//                                        .setNegativeButton(Html.fromHtml("<font color = '#ff0000'> Delete </font>") , null)
+//                                        .show();
+//            }
+//        });
 
     }
 
