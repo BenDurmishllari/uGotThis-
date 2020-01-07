@@ -11,6 +11,7 @@
          any task-->
 
     <!-- Relative layout that it has the header on top -->
+
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
@@ -35,10 +36,9 @@
         android:background="@drawable/reg_form_corner"
         android:padding="10dp">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="match_parent">
 
             <LinearLayout
                 android:id="@+id/linearLayout2"
@@ -64,26 +64,31 @@
                     android:layout_marginTop="30dp"
                     android:orientation="vertical">
 
+
                     <ImageView
-                        android:id="@+id/imageView"
+                        android:id="@+id/btnCameraPost"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:srcCompat="@android:drawable/ic_menu_camera" />
 
+                    <ImageView
+                        android:id="@+id/lblImageView"
+                        android:layout_width="match_parent"
+                        android:layout_height="160dp" />
 
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="90dp"
+                    android:layout_marginTop="10dp"
                     android:orientation="vertical">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
-                        android:layout_marginTop="20dp"
+
                         android:fontFamily="sans-serif-light"
                         android:text="@string/task_title"
                         android:textAllCaps="true"
@@ -91,6 +96,7 @@
                         android:textSize="15sp" />
 
                     <EditText
+                        android:id="@+id/txtTaskTitle"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:layout_marginLeft="20dp"
@@ -115,6 +121,7 @@
                         android:textSize="15sp" />
 
                     <EditText
+                        android:id="@+id/txtTaskDescription"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:layout_marginLeft="20dp"
@@ -128,9 +135,10 @@
                         android:textSize="15sp" />
 
                     <Button
-                        android:id="@+id/registerbtn"
+                        android:id="@+id/btnTaskSave"
                         android:layout_width="wrap_content"
                         android:layout_height="40dp"
+                        android:layout_gravity="center"
                         android:layout_marginTop="40dp"
                         android:background="@drawable/btn_reg"
                         android:fontFamily="sans-serif-medium"
@@ -138,7 +146,6 @@
                         android:paddingRight="80dp"
                         android:text="@string/save_task"
                         android:textAllCaps="false"
-                        android:layout_gravity="center"
                         android:textColor="@color/regtxtcolor"
                         android:textSize="19sp" />
 
@@ -147,10 +154,7 @@
 
 
             </LinearLayout>
-
-            <!-- This linear layout has on it the text boxes and the button for the task update -->
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
 
 
     </RelativeLayout>

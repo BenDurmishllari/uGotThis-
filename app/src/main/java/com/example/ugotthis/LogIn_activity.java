@@ -137,7 +137,7 @@ public class LogIn_activity extends AppCompatActivity {
                                     taskApi.setUserId(snapshot.getString("userId"));
 
                                     startActivity(new Intent(LogIn_activity.this, TaskList.class));
-                                    Toast.makeText(LogIn_activity.this, "Welcome"+ " " + taskApi.getUsername(), Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(LogIn_activity.this, "Welcome Back"+ " " + taskApi.getUsername(), Toast.LENGTH_SHORT).show();
                                     finish();
                                 }
                             }

@@ -90,7 +90,7 @@ public class Register_activity extends AppCompatActivity {
 
                 if (currentUser != null)
                 {
-                    Toast.makeText(Register_activity.this, "Welcome Back", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Register_activity.this, "Welcome", Toast.LENGTH_SHORT).show();
                 }
                 else
                 {

@@ -4,30 +4,28 @@ import com.google.firebase.Timestamp;
 
 public class Task {
 
-    private String  title;
-    private String task;
-    private String imageUrl;
-    private String userId;
+    private String  title,
+                    description,
+                    userName,
+                    userId,
+                    imageUrl;
     private Timestamp timeAdded;
-    private String userName;
 
+    // empty constructor mandatory for firebase
     public Task() {}
 
-    public Task(String title, String task, String imageUrl, String userId, Timestamp timeAdded, String userName)
+    public Task(String title, String description, String userName, String userId, String imageUrl, Timestamp timeAdded)
     {
         this.title = title;
-        this.task = task;
-        this.imageUrl = imageUrl;
-        this.userId = userId;
-        this.timeAdded = timeAdded;
+        this.description = description;
         this.userName = userName;
+        this.userId = userId;
+        this.imageUrl = imageUrl;
+        this.timeAdded = timeAdded;
     }
 
     public String getTitle() { return title; }
     public void setTitle(String title) { this.title = title; }
-
-    public String getTask() { return task; }
-    public void setTask(String task) { this.task = task; }
 
     public String getImageUrl() { return imageUrl; }
     public void setImageUrl(String imageUrl) { this.imageUrl = imageUrl; }
@@ -41,4 +39,6 @@ public class Task {
     public String getUserName() { return userName; }
     public void setUserName(String userName) { this.userName = userName; }
 
+    public String getDescription() { return description; }
+    public void setDescription(String description) { this.description = description; }
 }
