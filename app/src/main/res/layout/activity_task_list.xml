@@ -76,7 +76,13 @@
                 android:layout_height="485dp"
                 android:orientation="vertical"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+                android:background="@color/greypoor">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="450dp" />
 
                 <TextView
                     android:id="@+id/list_for_Tasks_View"
@@ -84,11 +90,6 @@
                     android:layout_height="wrap_content"
                     android:text="Nothing to Show here at the moment"
                     android:visibility="invisible" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerView"
-                    android:layout_width="match_parent"
-                    android:layout_height="450dp" />
 
             </LinearLayout>
 

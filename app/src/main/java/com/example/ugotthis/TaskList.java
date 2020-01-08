@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -48,14 +49,12 @@ public class TaskList extends AppCompatActivity {
 
 
 
-//    ListView itemlist;
-//    private ListView listview;
-//    private ArrayList<String> arraylist;
-//    private ArrayAdapter adapter;
-//    Intent editpage;
-
     private Button btnLogout;
     private Button btnCreateTask;
+
+    private CardView cardView;
+    private Intent editpage;
+    private AlertDialog alertDialog;
 
     // Firebase attributes
     private FirebaseAuth firebaseAuth;
@@ -84,6 +83,7 @@ public class TaskList extends AppCompatActivity {
             public void onClick(View view)
             {
                 startActivity(new Intent(TaskList.this, CreateTask_activity.class));
+                taskList.clear();
             }
         });
 
@@ -108,34 +108,6 @@ public class TaskList extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-
-//        listview = findViewById(R.id.item_list);
-//        arraylist = new ArrayList<String>();
-//
-//        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
-//            {
-//                final int current_item = position;
-//                new AlertDialog.Builder(TaskList.this)
-//                                        .setIcon(android.R.drawable.ic_menu_edit)
-//                                        .setTitle("Do to you edit this?")
-//                                        .setMessage("Are you sure")
-//                                        .setPositiveButton(Html.fromHtml("<font color = '#0083FF'> Edit </font>"),
-//                                                            new DialogInterface.OnClickListener() {
-//                                            @Override
-//                                            public void onClick(DialogInterface dialog, int which)
-//                                            {
-//                                                editpage = new Intent(getApplicationContext(), Edit_activity.class);
-//                                                startActivity(editpage);
-//                                            }
-//                                        })
-//                                        .setNegativeButton(Html.fromHtml("<font color = '#ff0000'> Delete </font>") , null)
-//                                        .show();
-//            }
-//        });
-
     }
 
     @Override
@@ -153,10 +125,11 @@ public class TaskList extends AppCompatActivity {
                                 taskList.add(task);
                             }
 
-                            //invoke recyler view
+                            //invoke recycler view
                             taskRecycleViewAdapter = new TaskRecycleViewAdapter(TaskList.this, taskList);
                             recyclerView.setAdapter(taskRecycleViewAdapter);
                             taskRecycleViewAdapter.notifyDataSetChanged();
+
                         }
                         else{
                             noTaskEntry.setVisibility(View.VISIBLE);
@@ -171,5 +144,6 @@ public class TaskList extends AppCompatActivity {
 
                     }
                 });
+
     }
 }

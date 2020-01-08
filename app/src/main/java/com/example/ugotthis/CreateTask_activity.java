@@ -138,6 +138,7 @@ public class CreateTask_activity extends AppCompatActivity implements View.OnCli
         final String title = txtTaskTitle.getText().toString().trim();
         final String description = txtTaskDescription.getText().toString().trim();
 
+
         if (!TextUtils.isEmpty(title) && !TextUtils.isEmpty(description) && imageUri != null)
         {
             //save the file && make the file unique by timestamp
