@@ -64,12 +64,20 @@ public class TaskRecycleViewAdapter extends RecyclerView.Adapter<TaskRecycleView
     private CollectionReference collectionReference = database.collection("Task");
     public static DocumentReference docRef;
 
+    private TaskListener mTaskListener;
+
+    public interface  TaskListener{
+        void onTaskComplete(int taskPosition);
+    }
 
 
-    public TaskRecycleViewAdapter(Context context, List<Task> taskList)
+
+
+    public TaskRecycleViewAdapter(Context context, List<Task> taskList, TaskListener taskListener)
     {
         this.context = context;
         this.taskList = taskList;
+        mTaskListener = taskListener;
     }
 
 
@@ -85,9 +93,12 @@ public class TaskRecycleViewAdapter extends RecyclerView.Adapter<TaskRecycleView
         final ViewHolder viewHolder = new ViewHolder(view, context);
 
 
-        final int TaskPosition = viewHolder.getAdapterPosition()+1;
-        final Task tasks = taskList.get(TaskPosition);
-        docRef = database.collection("Task").document(tasks.getTaskDocumentId());
+
+        //final int TaskPosition = viewHolder.getAdapterPosition()+1;
+//        final Task tasks = taskList.get(TaskPosition);
+//        docRef = database.collection("Task").document(tasks.getTaskDocumentId());
+        //final String TaskPosition = String.valueOf(viewHolder.getAdapterPosition());
+
 
 
         viewHolder.itemsCardView.setOnClickListener(new View.OnClickListener()
@@ -95,30 +106,37 @@ public class TaskRecycleViewAdapter extends RecyclerView.Adapter<TaskRecycleView
             @Override
             public void onClick(View v)
             {
+                mTaskListener.onTaskComplete(viewHolder.getAdapterPosition());
 
-                itemsDialog = new AlertDialog.Builder(context)
-                                        .setIcon(android.R.drawable.ic_menu_edit)
-                                        .setTitle("Manage Your Task" + TaskApi.getInstance().getUsername())
-                                        .setMessage("Are you sure")
-                                        .setPositiveButton(Html.fromHtml("<font color = '#0083FF'> Edit </font>"),null)
-                                        .setNeutralButton(Html.fromHtml("<font color = '#ff0000'> View Task </font>") , null)
-                                        .setNegativeButton(Html.fromHtml("<font color = '#ff0000'> Delete </font>"),
-                                                new DialogInterface.OnClickListener()
-                                                {
-                                                    @Override
-                                                    public void onClick(DialogInterface dialog, int which)
-                                                    {
-                                                        //TaskList.DeleteTasks();
-                                                        Log.d(TAG, "douleyei -----------");
-                                                        taskList.remove(TaskPosition);
-                                                        docRef.update(tasks.getDescription(), FieldValue.delete());
-                                                        docRef.delete();
-                                                        
-                                                        //taskRecycleViewAdapter.notifyItemRemoved(TaskPosition);
-
-                                                    }
-                                                })
-                                        .show();
+//                Toast.makeText(context, "edw-----" + String.valueOf(viewHolder.getAdapterPosition()), Toast.LENGTH_SHORT).show();
+//                final Task tasks = taskList.get(viewHolder.getAdapterPosition());
+//                docRef = database.collection("Task").document(tasks.getTaskDocumentId());
+//                //Log.d(TAG, "edw-----" + TaskPosition);
+//
+//                itemsDialog = new AlertDialog.Builder(context)
+//                                        .setIcon(android.R.drawable.ic_menu_edit)
+//                                        .setTitle("Manage Your Task" + TaskApi.getInstance().getUsername())
+//                                        .setMessage("Are you sure")
+//                                        .setPositiveButton(Html.fromHtml("<font color = '#0083FF'> Edit </font>"),null)
+//                                        .setNeutralButton(Html.fromHtml("<font color = '#ff0000'> View Task </font>") , null)
+//                                        .setNegativeButton(Html.fromHtml("<font color = '#ff0000'> Delete </font>"),
+//                                                new DialogInterface.OnClickListener()
+//                                                {
+//                                                    @Override
+//                                                    public void onClick(DialogInterface dialog, int which)
+//                                                    {
+//
+//
+//                                                        Log.d(TAG, "douleyei -----------");
+//                                                        taskList.remove(tasks);
+//                                                        docRef.update(tasks.getDescription(), FieldValue.delete());
+//                                                        docRef.delete();
+//                                                        //taskRecycleViewAdapter.notifyDataSetChanged();
+//                                                        //taskRecycleViewAdapter.notifyItemRemoved(TaskPosition);
+//
+//                                                    }
+//                                                })
+//                                        .show();
                 //Toast.makeText(context, ""+docRef, Toast.LENGTH_SHORT).show();
                 //Toast.makeText(context, "Test if its work" + String.valueOf(viewHolder.getAdapterPosition()), Toast.LENGTH_SHORT).show();
                 //Toast.makeText(context, "Test if its work" + idtasks, Toast.LENGTH_SHORT).show();
@@ -175,7 +193,7 @@ public class TaskRecycleViewAdapter extends RecyclerView.Adapter<TaskRecycleView
     public class ViewHolder extends RecyclerView.ViewHolder
     {
         // test for taking id of the items
-        private CardView itemsCardView;
+        public CardView itemsCardView;
 
         public TextView title,
                         description,

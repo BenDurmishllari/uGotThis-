@@ -2,12 +2,14 @@ package com.example.ugotthis;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -49,6 +51,7 @@ import java.util.List;
 
 import Model.Task;
 import UI.TaskRecycleViewAdapter;
+import UI.TaskRecycleViewAdapter.ViewHolder;
 import Util.TaskApi;
 
 public class TaskList extends AppCompatActivity {
@@ -81,11 +84,20 @@ public class TaskList extends AppCompatActivity {
 
     public static String TaskDocId = "";
 
+    public ViewHolder viewHolder;
+
+    public DocumentReference docRef;
+
+    public int TaskPosition;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task_list);
+
 
         btnCreateTask = findViewById(R.id.btn_add_tasks);
         btnCreateTask.setOnClickListener(new View.OnClickListener()
@@ -125,8 +137,6 @@ public class TaskList extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        final int positionlist = taskList.size();
-
 
         collectionReference.whereEqualTo("userId", TaskApi.getInstance().getUserId())
                 .get()
@@ -143,18 +153,48 @@ public class TaskList extends AppCompatActivity {
                                     // save the id of the document
                                     task.setTaskDocumentId(tasks.getId());
                                     taskList.add(task);
-                                    //TaskDocId = tasks.getId();
+
 
                                 }
                                 catch (Exception e)
                                 {
                                     Toast.makeText(TaskList.this, "Can't load the data please restart your application", Toast.LENGTH_SHORT).show();
                                 }
-
                             }
-                            //Toast.makeText(TaskList.this, "" + TaskDocId, Toast.LENGTH_SHORT).show();
+
                             //invoke recycler view
-                            taskRecycleViewAdapter = new TaskRecycleViewAdapter(TaskList.this, taskList);
+                            taskRecycleViewAdapter = new TaskRecycleViewAdapter(TaskList.this, taskList, new TaskRecycleViewAdapter.TaskListener() {
+                                @Override
+                                public void onTaskComplete(int taskPosition)
+                                {
+
+                                    final Task tasks = taskList.get(taskPosition);
+                                    docRef = database.collection("Task").document(tasks.getTaskDocumentId());
+
+
+                                    alertDialog = new AlertDialog.Builder(TaskList.this)
+                                            .setIcon(android.R.drawable.ic_menu_edit)
+                                            .setTitle("Manage Your Task" + TaskApi.getInstance().getUsername())
+                                            .setMessage("Are you sure")
+                                            .setPositiveButton(Html.fromHtml("<font color = '#0083FF'> Edit </font>"),null)
+                                            .setNeutralButton(Html.fromHtml("<font color = '#ff0000'> View Task </font>") , null)
+                                            .setNegativeButton(Html.fromHtml("<font color = '#ff0000'> Delete </font>"),
+                                                    new DialogInterface.OnClickListener()
+                                                    {
+                                                        @Override
+                                                        public void onClick(DialogInterface dialog, int which)
+                                                        {
+                                                            Log.d(TAG, "douleyei -----------");
+                                                            taskList.remove(tasks);
+                                                            docRef.update(tasks.getDescription(), FieldValue.delete());
+                                                            docRef.delete();
+                                                            taskRecycleViewAdapter.notifyDataSetChanged();
+                                                            taskRecycleViewAdapter.notifyItemRemoved(TaskPosition);
+                                                        }
+                                                    })
+                                            .show();
+                                }
+                            });
                             recyclerView.setAdapter(taskRecycleViewAdapter);
                             taskRecycleViewAdapter.notifyDataSetChanged();
 
@@ -177,28 +217,4 @@ public class TaskList extends AppCompatActivity {
 
     }
 
-//    public static void DeleteTasks()
-//    {
-//
-//       database.collection("Task").document(String.valueOf(TaskDocId))
-//                .delete()
-//                .addOnSuccessListener(new OnSuccessListener<Void>()
-//                {
-//                    @Override
-//                    public void onSuccess(Void aVoid)
-//                    {
-//                        //taskList.remove(TaskPosition);
-//                        //database.update(tasks.getDescription(), FieldValue.delete());
-//                        //docRef.delete();
-//                        Log.d(TAG, "Task Deleted -----------------");
-//
-//                    }
-//                }).addOnFailureListener(new OnFailureListener() {
-//            @Override
-//            public void onFailure(@NonNull Exception e)
-//            {
-//                Log.v(TAG, "Task Deleted -----------------");
-//            }
-//        });
-//    }
 }
