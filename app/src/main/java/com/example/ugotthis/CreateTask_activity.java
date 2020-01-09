@@ -142,7 +142,7 @@ public class CreateTask_activity extends AppCompatActivity implements View.OnCli
         if (!TextUtils.isEmpty(title) && !TextUtils.isEmpty(description) && imageUri != null)
         {
             //save the file && make the file unique by timestamp
-            final StorageReference filepath = storageReference.child("task_file").child("my_file" + Timestamp.now().getSeconds());
+            final StorageReference filepath = storageReference.child("task_file" + currentUserName).child("my_file" + Timestamp.now().getSeconds());
 
             filepath.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>()
             {
@@ -163,6 +163,7 @@ public class CreateTask_activity extends AppCompatActivity implements View.OnCli
                             task.setUserId(currentUserId);
                             task.setImageUrl(imageUrl);
                             task.setTimeAdded(new Timestamp(new Date()));
+
 
                             collectionReference.add(task).addOnSuccessListener(new OnSuccessListener<DocumentReference>()
                             {
@@ -207,6 +208,7 @@ public class CreateTask_activity extends AppCompatActivity implements View.OnCli
             Toast.makeText(this, "oups", Toast.LENGTH_SHORT).show();
         }
     }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data)

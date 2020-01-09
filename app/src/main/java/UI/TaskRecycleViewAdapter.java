@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.text.Html;
 import android.text.format.DateUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.ugotthis.Edit_activity;
 import com.example.ugotthis.R;
 import com.example.ugotthis.TaskList;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FieldValue;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -27,13 +39,32 @@ import java.util.List;
 import Model.Task;
 import Util.TaskApi;
 
+import static android.content.ContentValues.TAG;
+
 
 public class TaskRecycleViewAdapter extends RecyclerView.Adapter<TaskRecycleViewAdapter.ViewHolder> {
 
     private Context context;
     private List<Task> taskList;
+    Task task;
+    public static String TaskDocId = "";
 
     AlertDialog itemsDialog;
+
+    // Firebase attributes
+    private FirebaseAuth firebaseAuth;
+    private FirebaseAuth.AuthStateListener authStateListener;
+
+    private static FirebaseFirestore database = FirebaseFirestore.getInstance();
+    private StorageReference storageReference;
+
+    private RecyclerView recyclerView;
+    private TaskRecycleViewAdapter taskRecycleViewAdapter;
+
+    private CollectionReference collectionReference = database.collection("Task");
+    public static DocumentReference docRef;
+
+
 
     public TaskRecycleViewAdapter(Context context, List<Task> taskList)
     {
@@ -46,6 +77,7 @@ public class TaskRecycleViewAdapter extends RecyclerView.Adapter<TaskRecycleView
     @Override
     public TaskRecycleViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
     {
+
         // Working Part before test
 //        View view = LayoutInflater.from(context).inflate(R.layout.tasks_for_list_view, parent, false);
 //        return new ViewHolder(view, context);
@@ -53,6 +85,9 @@ public class TaskRecycleViewAdapter extends RecyclerView.Adapter<TaskRecycleView
         final ViewHolder viewHolder = new ViewHolder(view, context);
 
 
+        final int TaskPosition = viewHolder.getAdapterPosition()+1;
+        final Task tasks = taskList.get(TaskPosition);
+        docRef = database.collection("Task").document(tasks.getTaskDocumentId());
 
 
         viewHolder.itemsCardView.setOnClickListener(new View.OnClickListener()
@@ -60,27 +95,60 @@ public class TaskRecycleViewAdapter extends RecyclerView.Adapter<TaskRecycleView
             @Override
             public void onClick(View v)
             {
+
                 itemsDialog = new AlertDialog.Builder(context)
                                         .setIcon(android.R.drawable.ic_menu_edit)
                                         .setTitle("Manage Your Task" + TaskApi.getInstance().getUsername())
                                         .setMessage("Are you sure")
-                                        .setPositiveButton(Html.fromHtml("<font color = '#0083FF'> Edit </font>"),
-                                                            new DialogInterface.OnClickListener() {
-                                            @Override
-                                            public void onClick(DialogInterface dialog, int which)
-                                            {
-                                            }
-                                        })
+                                        .setPositiveButton(Html.fromHtml("<font color = '#0083FF'> Edit </font>"),null)
                                         .setNeutralButton(Html.fromHtml("<font color = '#ff0000'> View Task </font>") , null)
-                                        .setNegativeButton(Html.fromHtml("<font color = '#ff0000'> Delete </font>") , null)
-                                        .show();
+                                        .setNegativeButton(Html.fromHtml("<font color = '#ff0000'> Delete </font>"),
+                                                new DialogInterface.OnClickListener()
+                                                {
+                                                    @Override
+                                                    public void onClick(DialogInterface dialog, int which)
+                                                    {
+                                                        //TaskList.DeleteTasks();
+                                                        Log.d(TAG, "douleyei -----------");
+                                                        taskList.remove(TaskPosition);
+                                                        docRef.update(tasks.getDescription(), FieldValue.delete());
+                                                        docRef.delete();
+                                                        
+                                                        //taskRecycleViewAdapter.notifyItemRemoved(TaskPosition);
 
-                Toast.makeText(context, "Test if its work" + String.valueOf(viewHolder.getAdapterPosition()), Toast.LENGTH_SHORT).show();
+                                                    }
+                                                })
+                                        .show();
+                //Toast.makeText(context, ""+docRef, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(context, "Test if its work" + String.valueOf(viewHolder.getAdapterPosition()), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(context, "Test if its work" + idtasks, Toast.LENGTH_SHORT).show();
             }
         });
 
         return viewHolder;
     }
+
+//    public static void DeleteTasks()
+//    {
+//
+//        database.collection("Task").document(String.valueOf(docRef))
+//                .delete()
+//                .addOnSuccessListener(new OnSuccessListener<Void>()
+//                {
+//                    @Override
+//                    public void onSuccess(Void aVoid)
+//                    {
+//                        Log.d(TAG, "Task Deleted -----------------");
+//
+//                    }
+//                }).addOnFailureListener(new OnFailureListener() {
+//            @Override
+//            public void onFailure(@NonNull Exception e)
+//            {
+//                Log.v(TAG, "Task Deleted -----------------");
+//            }
+//        });
+//    }
 
     @Override
     public void onBindViewHolder(@NonNull TaskRecycleViewAdapter.ViewHolder holder, int position)
