@@ -12,9 +12,12 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.text.Html;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -45,6 +48,9 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+
+import org.w3c.dom.Text;
+
 import static android.content.ContentValues.TAG;
 
 import java.util.ArrayList;
@@ -60,7 +66,6 @@ import Util.TaskApi;
 public class TaskList extends AppCompatActivity {
 
 
-
     private Button btnLogout;
     private Button btnCreateTask;
 
@@ -72,7 +77,6 @@ public class TaskList extends AppCompatActivity {
     private String currentUserId;
 
 
-
     // Firebase attributes
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener authStateListener;
@@ -82,21 +86,14 @@ public class TaskList extends AppCompatActivity {
     private StorageReference storageReference;
     private FirebaseStorage vStorage;
     private static Task tasks;
-
     private List<Task> taskList;
     private RecyclerView recyclerView;
     private TaskRecycleViewAdapter taskRecycleViewAdapter;
-
     private CollectionReference collectionReference = database.collection("Task");
-
     private TextView noTaskEntry;
-
     public static String TaskDocId = "";
-
     public ViewHolder viewHolder;
-
     public DocumentReference docRef;
-
     public int TaskPosition;
 
 
@@ -106,9 +103,6 @@ public class TaskList extends AppCompatActivity {
         setContentView(R.layout.activity_task_list);
 
         vStorage = FirebaseStorage.getInstance();
-
-
-
         btnCreateTask = findViewById(R.id.btn_add_tasks);
         btnCreateTask.setOnClickListener(new View.OnClickListener()
         {
@@ -135,8 +129,6 @@ public class TaskList extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         user = firebaseAuth.getCurrentUser();
 
-
-
         taskList = new ArrayList<>();
         noTaskEntry = findViewById(R.id.list_for_Tasks_View);
         recyclerView = findViewById(R.id.recyclerView);
@@ -147,10 +139,7 @@ public class TaskList extends AppCompatActivity {
         {
             currentUserId = TaskApi.getInstance().getUserId();
             currentUserName = TaskApi.getInstance().getUsername();
-
-            //ToDo add the lbl with current user name
         }
-
 
     }
 
@@ -173,12 +162,14 @@ public class TaskList extends AppCompatActivity {
                                     // save the id of the document
                                     task.setTaskDocumentId(tasks.getId());
                                     taskList.add(task);
+
                                 }
                                 catch (Exception e)
                                 {
                                     Toast.makeText(TaskList.this, "Can't load the data please restart your application", Toast.LENGTH_SHORT).show();
                                 }
                             }
+
 
                             //invoke recycler view
                             taskRecycleViewAdapter = new TaskRecycleViewAdapter(TaskList.this, taskList, new TaskRecycleViewAdapter.TaskListener() {

@@ -70,23 +70,15 @@ public class Edit_activity extends AppCompatActivity  implements  View.OnClickLi
     // connection to firestore
     private FirebaseFirestore database = FirebaseFirestore.getInstance();
     private StorageReference storageReference;
-
     private CollectionReference collectionReference = database.collection("Task");
     private Uri imageUri;
-
     private DocumentReference docRef;
-
     private List<Task> taskList;
-
     private RecyclerView recyclerView;
     private TaskRecycleViewAdapter taskRecycleViewAdapter;
-
     private AlertDialog alertDialog;
-
     public int TaskPosition;
-
     private TextView noTaskEntry;
-
 
 
     @Override
@@ -95,36 +87,23 @@ public class Edit_activity extends AppCompatActivity  implements  View.OnClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_activity);
 
-
-
         storageReference = FirebaseStorage.getInstance().getReference();
-
         imageView = findViewById(R.id.lblImageView2);
-
         firebaseAuth = FirebaseAuth.getInstance();
         txtTaskTitle = findViewById(R.id.txtTaskTitle);
         txtTaskDescription = findViewById(R.id.txtTaskDescription);
         btnTaskUpdate = findViewById(R.id.btnTaskUpdate);
-
         btnAddMedia = findViewById(R.id.btnCameraPost2);
-
         btnAddMedia.setOnClickListener(this);
         btnTaskUpdate.setOnClickListener(this);
-
         taskList = new ArrayList<>();
-
         noTaskEntry = findViewById(R.id.list_for_Tasks_View);
-
         recyclerView = findViewById(R.id.recyclerView);
-        //recyclerView.setHasFixedSize(true);
-        //recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         if (TaskApi.getInstance() != null)
         {
             currentUserId = TaskApi.getInstance().getUserId();
             currentUserName = TaskApi.getInstance().getUsername();
-
-            //ToDo add the lbl with current user name
         }
 
         authStateListener = new FirebaseAuth.AuthStateListener()
@@ -133,19 +112,10 @@ public class Edit_activity extends AppCompatActivity  implements  View.OnClickLi
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth)
             {
                 user = firebaseAuth.getCurrentUser();
-                if (user != null)
-                {
-                    //ToDo add a toas
-                }
-                else
-                {
-                    //ToDo add a hot dog :D
-                }
+                if (user != null) {}
+                else {}
             }
         };
-
-
-
 
     }
 
@@ -194,7 +164,6 @@ public class Edit_activity extends AppCompatActivity  implements  View.OnClickLi
                                     // save the id of the document
                                     task.setTaskDocumentId(tasks.getId());
                                     taskList.add(task);
-
                                 }
                                 catch (Exception e)
                                 {
@@ -207,9 +176,6 @@ public class Edit_activity extends AppCompatActivity  implements  View.OnClickLi
                             final String desc = txtTaskDescription.getText().toString().trim();
 
                             docRef = database.collection("Task").document(tasks.getTaskDocumentId());
-//                            docRef.update("title", title);
-//                            docRef.update("description", desc);
-//                            startActivity(new Intent(Edit_activity.this, TaskList.class));
 
                             if (!TextUtils.isEmpty(title) && !TextUtils.isEmpty(desc) && imageUri != null)
                             {
@@ -252,6 +218,10 @@ public class Edit_activity extends AppCompatActivity  implements  View.OnClickLi
                                         });
                                     }
                                 });
+                            }
+                            else
+                            {
+                                Toast.makeText(Edit_activity.this, "Please add a media file", Toast.LENGTH_SHORT).show();
                             }
 
                         }

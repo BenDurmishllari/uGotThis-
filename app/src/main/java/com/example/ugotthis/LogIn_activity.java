@@ -84,10 +84,8 @@ public class LogIn_activity extends AppCompatActivity {
                 startActivity(register);
             }
         });
-
         // instantiate the firebaseAuth
         firebaseAuth = FirebaseAuth.getInstance();
-
         btnLogin = findViewById(R.id.btnlogin);
         txtEmail = findViewById(R.id.txtLoginEmail);
         txtPassword = findViewById(R.id.txtLoginPassword);
@@ -97,7 +95,6 @@ public class LogIn_activity extends AppCompatActivity {
             @Override
             public void onClick(View view)
             {
-                //ToDo add login method
                 loginEmailPasswordUser(txtEmail.getText().toString().trim(), txtPassword.getText().toString().trim());
             }
         });
@@ -126,7 +123,6 @@ public class LogIn_activity extends AppCompatActivity {
                             {
                                 Toast.makeText(LogIn_activity.this, "hiiiii", Toast.LENGTH_SHORT).show();
                             }
-
                             assert queryDocumentSnapshots != null;
                             if (!queryDocumentSnapshots.isEmpty())
                             {
@@ -150,7 +146,6 @@ public class LogIn_activity extends AppCompatActivity {
                 @Override
                 public void onFailure(@NonNull Exception e)
                 {
-                    //ToDo add progress bar in the end
                     Toast.makeText(LogIn_activity.this, "Something went wrong ", Toast.LENGTH_SHORT).show();
                 }
             });

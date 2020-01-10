@@ -123,32 +123,9 @@
                 android:background="@drawable/reg_txt_corners"
                 android:layout_marginRight="20dp"
                 android:layout_marginLeft="20dp"
+                android:inputType="textPassword"
                 android:drawableEnd="@drawable/reg_pass_icon_24dp"/>
 
-<!--            <TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:fontFamily="sans-serif-light"-->
-<!--                android:text="@string/lblconfirmpass"-->
-<!--                android:textAllCaps="true"-->
-<!--                android:textColor="@color/regtxtcolor"-->
-<!--                android:textSize="15sp"-->
-<!--                android:layout_marginLeft="20dp"-->
-<!--                android:layout_marginTop="20dp"/>-->
-
-<!--            <EditText-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="40dp"-->
-<!--                android:layout_marginTop="5dp"-->
-<!--                android:textSize="15sp"-->
-<!--                android:textColor="@color/black"-->
-<!--                android:fontFamily="sans-serif-light"-->
-<!--                android:paddingLeft="15dp"-->
-<!--                android:paddingRight="15dp"-->
-<!--                android:background="@drawable/reg_txt_corners"-->
-<!--                android:layout_marginRight="20dp"-->
-<!--                android:layout_marginLeft="20dp"-->
-<!--                android:drawableEnd="@drawable/regist_confirm_pass_icon"/>-->
 
             <!-- Relative layout that it has into in the registration button -->
             <RelativeLayout

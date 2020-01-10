@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.text.Html;
 import android.text.format.DateUtils;
 import android.util.Log;
@@ -66,12 +67,12 @@ public class TaskRecycleViewAdapter extends RecyclerView.Adapter<TaskRecycleView
 
     private TaskListener mTaskListener;
 
+    // create an interface to inform the adapter the action od the card list
+    // for the position of the cards that the user check
     public interface  TaskListener
     {
         void onTaskComplete(int taskPosition);
     }
-
-
 
     public TaskRecycleViewAdapter(Context context, List<Task> taskList, TaskListener taskListener)
     {
@@ -88,13 +89,16 @@ public class TaskRecycleViewAdapter extends RecyclerView.Adapter<TaskRecycleView
         View view = LayoutInflater.from(context).inflate(R.layout.tasks_for_list_view, parent, false);
         final ViewHolder viewHolder = new ViewHolder(view, context);
 
-
+        // listener for to get the adapterposition
+        // and to pass on the Tasklist the task position
+        // on the card list
         viewHolder.itemsCardView.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
                 mTaskListener.onTaskComplete(viewHolder.getAdapterPosition());
+
             }
         });
 
@@ -112,6 +116,8 @@ public class TaskRecycleViewAdapter extends RecyclerView.Adapter<TaskRecycleView
         holder.description.setText(task.getDescription());
         holder.status.setText(task.getStatus());
         imageUrl = task.getImageUrl();
+
+
 
         String timeAgo = (String) DateUtils.getRelativeTimeSpanString(task.getTimeAdded().getSeconds() * 1000);
         holder.dateAdded.setText(timeAgo);
@@ -140,6 +146,7 @@ public class TaskRecycleViewAdapter extends RecyclerView.Adapter<TaskRecycleView
                 username;
 
 
+
         public ViewHolder(@NonNull View itemView, Context cntx)
         {
             super(itemView);
@@ -150,6 +157,7 @@ public class TaskRecycleViewAdapter extends RecyclerView.Adapter<TaskRecycleView
             image = itemView.findViewById(R.id.ImageViewRowListTasks);
             itemsCardView = itemView.findViewById(R.id.cardListTask);
             status = itemView.findViewById(R.id.lblStatus);
+
         }
     }
 }

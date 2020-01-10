@@ -54,7 +54,6 @@ public class Register_activity extends AppCompatActivity {
     private EditText txtEmail;
     private EditText txtPassword;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,7 +69,6 @@ public class Register_activity extends AppCompatActivity {
                 startActivity(loginpage);
             }
         });
-
 
         // instantiate the firebaseAuth
         firebaseAuth = FirebaseAuth.getInstance();
@@ -112,7 +110,6 @@ public class Register_activity extends AppCompatActivity {
                     String email = txtEmail.getText().toString().trim();
                     String password = txtPassword.getText().toString().trim();
 
-                    //ToDo add the method for create user account
                     createUserAccount(username,email,password);
                 }
                 else
@@ -121,7 +118,6 @@ public class Register_activity extends AppCompatActivity {
                 }
             }
         });
-
 
     }
 
@@ -172,7 +168,6 @@ public class Register_activity extends AppCompatActivity {
                                         }
                                         else
                                         {
-                                            //ToDo add progress bar in the end
                                         }
                                     }
                                 });

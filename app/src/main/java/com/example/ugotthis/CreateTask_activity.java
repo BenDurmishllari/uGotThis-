@@ -47,6 +47,7 @@ public class CreateTask_activity extends AppCompatActivity implements View.OnCli
     private TextView TaskDate;
     private ImageView imageView;
 
+
     private String currentUserId;
     private String currentUserName;
 
@@ -73,8 +74,7 @@ public class CreateTask_activity extends AppCompatActivity implements View.OnCli
         txtTaskTitle = findViewById(R.id.txtTaskTitle);
         txtTaskDescription = findViewById(R.id.txtTaskDescription);
         btnSaveTask = findViewById(R.id.btnTaskSave);
-        //ToDo current user label
-        //lblCurrentUser = findViewById(R.id.)
+
 
         btnAddMedia = findViewById(R.id.btnCameraPost);
 
@@ -100,11 +100,11 @@ public class CreateTask_activity extends AppCompatActivity implements View.OnCli
                 user = firebaseAuth.getCurrentUser();
                 if (user != null)
                 {
-                    //ToDo add a toas
+
                 }
                 else
                 {
-                    //ToDo add a hot dog :D
+
                 }
             }
         };
@@ -130,6 +130,7 @@ public class CreateTask_activity extends AppCompatActivity implements View.OnCli
                 startActivityForResult(galleryIntent, GALLERY_CODE);
 
                 break;
+
         }
     }
 
@@ -164,7 +165,7 @@ public class CreateTask_activity extends AppCompatActivity implements View.OnCli
                             task.setImageUrl(imageUrl);
                             task.setTimeAdded(new Timestamp(new Date()));
 
-
+                            // add the object on the database
                             collectionReference.add(task).addOnSuccessListener(new OnSuccessListener<DocumentReference>()
                             {
                                 @Override
@@ -205,10 +206,9 @@ public class CreateTask_activity extends AppCompatActivity implements View.OnCli
         }
         else
         {
-            Toast.makeText(this, "oups", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please add a media file", Toast.LENGTH_SHORT).show();
         }
     }
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data)
