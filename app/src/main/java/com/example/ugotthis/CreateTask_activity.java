@@ -36,7 +36,7 @@ import Model.Task;
 public class CreateTask_activity extends AppCompatActivity implements View.OnClickListener {
 
     private static final int GALLERY_CODE = 1;
-    private static final String TAG = "PostReflectionActivity";
+    private static final String TAG = "PostTaskActivity";
 
     // main widgets
     private Button btnSaveTask;
@@ -142,7 +142,7 @@ public class CreateTask_activity extends AppCompatActivity implements View.OnCli
         if (!TextUtils.isEmpty(title) && !TextUtils.isEmpty(description) && imageUri != null)
         {
             //save the file && make the file unique by timestamp
-            final StorageReference filepath = storageReference.child("task_file" + currentUserName).child("my_file" + Timestamp.now().getSeconds());
+            final StorageReference filepath = storageReference.child("task_file").child("my_file" + Timestamp.now().getSeconds());
 
             filepath.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>()
             {

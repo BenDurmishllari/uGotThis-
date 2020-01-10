@@ -66,10 +66,10 @@ public class TaskRecycleViewAdapter extends RecyclerView.Adapter<TaskRecycleView
 
     private TaskListener mTaskListener;
 
-    public interface  TaskListener{
+    public interface  TaskListener
+    {
         void onTaskComplete(int taskPosition);
     }
-
 
 
 
@@ -80,25 +80,13 @@ public class TaskRecycleViewAdapter extends RecyclerView.Adapter<TaskRecycleView
         mTaskListener = taskListener;
     }
 
-
     @NonNull
     @Override
     public TaskRecycleViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
     {
 
-        // Working Part before test
-//        View view = LayoutInflater.from(context).inflate(R.layout.tasks_for_list_view, parent, false);
-//        return new ViewHolder(view, context);
         View view = LayoutInflater.from(context).inflate(R.layout.tasks_for_list_view, parent, false);
         final ViewHolder viewHolder = new ViewHolder(view, context);
-
-
-
-        //final int TaskPosition = viewHolder.getAdapterPosition()+1;
-//        final Task tasks = taskList.get(TaskPosition);
-//        docRef = database.collection("Task").document(tasks.getTaskDocumentId());
-        //final String TaskPosition = String.valueOf(viewHolder.getAdapterPosition());
-
 
 
         viewHolder.itemsCardView.setOnClickListener(new View.OnClickListener()
@@ -107,66 +95,12 @@ public class TaskRecycleViewAdapter extends RecyclerView.Adapter<TaskRecycleView
             public void onClick(View v)
             {
                 mTaskListener.onTaskComplete(viewHolder.getAdapterPosition());
-
-//                Toast.makeText(context, "edw-----" + String.valueOf(viewHolder.getAdapterPosition()), Toast.LENGTH_SHORT).show();
-//                final Task tasks = taskList.get(viewHolder.getAdapterPosition());
-//                docRef = database.collection("Task").document(tasks.getTaskDocumentId());
-//                //Log.d(TAG, "edw-----" + TaskPosition);
-//
-//                itemsDialog = new AlertDialog.Builder(context)
-//                                        .setIcon(android.R.drawable.ic_menu_edit)
-//                                        .setTitle("Manage Your Task" + TaskApi.getInstance().getUsername())
-//                                        .setMessage("Are you sure")
-//                                        .setPositiveButton(Html.fromHtml("<font color = '#0083FF'> Edit </font>"),null)
-//                                        .setNeutralButton(Html.fromHtml("<font color = '#ff0000'> View Task </font>") , null)
-//                                        .setNegativeButton(Html.fromHtml("<font color = '#ff0000'> Delete </font>"),
-//                                                new DialogInterface.OnClickListener()
-//                                                {
-//                                                    @Override
-//                                                    public void onClick(DialogInterface dialog, int which)
-//                                                    {
-//
-//
-//                                                        Log.d(TAG, "douleyei -----------");
-//                                                        taskList.remove(tasks);
-//                                                        docRef.update(tasks.getDescription(), FieldValue.delete());
-//                                                        docRef.delete();
-//                                                        //taskRecycleViewAdapter.notifyDataSetChanged();
-//                                                        //taskRecycleViewAdapter.notifyItemRemoved(TaskPosition);
-//
-//                                                    }
-//                                                })
-//                                        .show();
-                //Toast.makeText(context, ""+docRef, Toast.LENGTH_SHORT).show();
-                //Toast.makeText(context, "Test if its work" + String.valueOf(viewHolder.getAdapterPosition()), Toast.LENGTH_SHORT).show();
-                //Toast.makeText(context, "Test if its work" + idtasks, Toast.LENGTH_SHORT).show();
             }
         });
 
         return viewHolder;
     }
 
-//    public static void DeleteTasks()
-//    {
-//
-//        database.collection("Task").document(String.valueOf(docRef))
-//                .delete()
-//                .addOnSuccessListener(new OnSuccessListener<Void>()
-//                {
-//                    @Override
-//                    public void onSuccess(Void aVoid)
-//                    {
-//                        Log.d(TAG, "Task Deleted -----------------");
-//
-//                    }
-//                }).addOnFailureListener(new OnFailureListener() {
-//            @Override
-//            public void onFailure(@NonNull Exception e)
-//            {
-//                Log.v(TAG, "Task Deleted -----------------");
-//            }
-//        });
-//    }
 
     @Override
     public void onBindViewHolder(@NonNull TaskRecycleViewAdapter.ViewHolder holder, int position)

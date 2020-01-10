@@ -43,6 +43,7 @@ import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import static android.content.ContentValues.TAG;
 
@@ -65,6 +66,9 @@ public class TaskList extends AppCompatActivity {
     private Intent editpage;
     private AlertDialog alertDialog;
 
+    private String currentUserName;
+    private String currentUserId;
+
     // Firebase attributes
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener authStateListener;
@@ -72,6 +76,7 @@ public class TaskList extends AppCompatActivity {
     private static FirebaseFirestore database = FirebaseFirestore.getInstance();
 
     private StorageReference storageReference;
+    private FirebaseStorage vStorage;
     private static Task tasks;
 
     private List<Task> taskList;
@@ -97,6 +102,9 @@ public class TaskList extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task_list);
+
+        vStorage = FirebaseStorage.getInstance();
+
 
 
         btnCreateTask = findViewById(R.id.btn_add_tasks);
@@ -125,11 +133,21 @@ public class TaskList extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         user = firebaseAuth.getCurrentUser();
 
+
+
         taskList = new ArrayList<>();
         noTaskEntry = findViewById(R.id.list_for_Tasks_View);
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        if (TaskApi.getInstance() != null)
+        {
+            currentUserId = TaskApi.getInstance().getUserId();
+            currentUserName = TaskApi.getInstance().getUsername();
+
+            //ToDo add the lbl with current user name
+        }
 
 
     }
@@ -144,7 +162,7 @@ public class TaskList extends AppCompatActivity {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                         if (!queryDocumentSnapshots.isEmpty()) {
-                            //String TaskDocId = "";
+
                             for (QueryDocumentSnapshot tasks : queryDocumentSnapshots)
                             {
                                 try
@@ -153,7 +171,6 @@ public class TaskList extends AppCompatActivity {
                                     // save the id of the document
                                     task.setTaskDocumentId(tasks.getId());
                                     taskList.add(task);
-
 
                                 }
                                 catch (Exception e)
@@ -171,25 +188,43 @@ public class TaskList extends AppCompatActivity {
                                     final Task tasks = taskList.get(taskPosition);
                                     docRef = database.collection("Task").document(tasks.getTaskDocumentId());
 
-
                                     alertDialog = new AlertDialog.Builder(TaskList.this)
                                             .setIcon(android.R.drawable.ic_menu_edit)
-                                            .setTitle("Manage Your Task" + TaskApi.getInstance().getUsername())
-                                            .setMessage("Are you sure")
-                                            .setPositiveButton(Html.fromHtml("<font color = '#0083FF'> Edit </font>"),null)
-                                            .setNeutralButton(Html.fromHtml("<font color = '#ff0000'> View Task </font>") , null)
-                                            .setNegativeButton(Html.fromHtml("<font color = '#ff0000'> Delete </font>"),
+                                            .setTitle("Manage Your Task" + " " + TaskApi.getInstance().getUsername())
+                                            .setMessage("Are you sure?")
+                                            .setPositiveButton(Html.fromHtml("<font color = '#0083FF'> Update Task </font>"),
                                                     new DialogInterface.OnClickListener()
                                                     {
                                                         @Override
                                                         public void onClick(DialogInterface dialog, int which)
                                                         {
-                                                            Log.d(TAG, "douleyei -----------");
-                                                            taskList.remove(tasks);
-                                                            docRef.update(tasks.getDescription(), FieldValue.delete());
-                                                            docRef.delete();
-                                                            taskRecycleViewAdapter.notifyDataSetChanged();
-                                                            taskRecycleViewAdapter.notifyItemRemoved(TaskPosition);
+                                                            startActivity(new Intent(TaskList.this, Edit_activity.class));
+                                                        }
+                                                    })
+                                            .setNegativeButton(Html.fromHtml("<font color = '#ff0000'> Delete Task </font>"),
+                                                    new DialogInterface.OnClickListener()
+                                                    {
+                                                        @Override
+                                                        public void onClick(DialogInterface dialog, int which)
+                                                        {
+                                                            try
+                                                            {
+                                                                taskList.remove(tasks);
+                                                                StorageReference storageReference = vStorage.getReferenceFromUrl(tasks.getImageUrl());
+                                                                storageReference.delete();
+                                                                docRef.update(tasks.getDescription(), FieldValue.delete());
+                                                                docRef.delete();
+
+                                                                taskRecycleViewAdapter.notifyDataSetChanged();
+                                                                taskRecycleViewAdapter.notifyItemRemoved(TaskPosition);
+                                                                Toast.makeText(TaskList.this, currentUserName + " " + "Your task has been deleted", Toast.LENGTH_SHORT).show();
+                                                            }
+                                                            catch (Exception e)
+                                                            {
+                                                                Toast.makeText(TaskList.this, currentUserName + " " + "Please try again, internet disconnected", Toast.LENGTH_SHORT).show();
+                                                            }
+
+
                                                         }
                                                     })
                                             .show();
@@ -197,8 +232,6 @@ public class TaskList extends AppCompatActivity {
                             });
                             recyclerView.setAdapter(taskRecycleViewAdapter);
                             taskRecycleViewAdapter.notifyDataSetChanged();
-
-
                         }
                         else{
                             noTaskEntry.setVisibility(View.VISIBLE);
