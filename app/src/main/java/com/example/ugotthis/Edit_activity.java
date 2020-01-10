@@ -211,28 +211,48 @@ public class Edit_activity extends AppCompatActivity  implements  View.OnClickLi
 //                            docRef.update("description", desc);
 //                            startActivity(new Intent(Edit_activity.this, TaskList.class));
 
-                            Map<String, Object> upMap = new HashMap<>();
-                            upMap.put("title", title);
-                            upMap.put("description", desc);
-
-                            docRef.update(upMap).addOnSuccessListener(new OnSuccessListener<Void>()
+                            if (!TextUtils.isEmpty(title) && !TextUtils.isEmpty(desc) && imageUri != null)
                             {
-                                @Override
-                                public void onSuccess(Void aVoid)
-                                {
-                                    Toast.makeText(Edit_activity.this, currentUserName + " " + "Your task has been updated", Toast.LENGTH_SHORT).show();
-                                    startActivity(new Intent(Edit_activity.this, TaskList.class));
-                                }
-                            }).addOnFailureListener(new OnFailureListener()
-                            {
-                                @Override
-                                public void onFailure(@NonNull Exception e)
-                                {
-                                    Toast.makeText(Edit_activity.this, currentUserName + " " + "Please try again, internet disconnected", Toast.LENGTH_SHORT).show();
-                                    startActivity(new Intent(Edit_activity.this, TaskList.class));
-                                }
-                            });
+                                final StorageReference filepath = storageReference.child("task_file").child("my_file" + Timestamp.now().getSeconds());
 
+                                filepath.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>()
+                                {
+                                    @Override
+                                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot)
+                                    {
+                                        filepath.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>()
+                                        {
+                                            @Override
+                                            public void onSuccess(Uri uri)
+                                            {
+                                                String imageUrl = uri.toString();
+                                                Map<String, Object> upMap = new HashMap<>();
+                                                upMap.put("title", title);
+                                                upMap.put("description", desc);
+                                                upMap.put("imageUrl", imageUrl);
+
+                                                docRef.update(upMap).addOnSuccessListener(new OnSuccessListener<Void>()
+                                                {
+                                                    @Override
+                                                    public void onSuccess(Void aVoid)
+                                                    {
+                                                        Toast.makeText(Edit_activity.this, currentUserName + " " + "Your task has been updated", Toast.LENGTH_SHORT).show();
+                                                        startActivity(new Intent(Edit_activity.this, TaskList.class));
+                                                    }
+                                                }).addOnFailureListener(new OnFailureListener()
+                                                {
+                                                    @Override
+                                                    public void onFailure(@NonNull Exception e)
+                                                    {
+                                                        Toast.makeText(Edit_activity.this, currentUserName + " " + "Please try again, internet disconnected", Toast.LENGTH_SHORT).show();
+                                                        startActivity(new Intent(Edit_activity.this, TaskList.class));
+                                                    }
+                                                });
+                                            }
+                                        });
+                                    }
+                                });
+                            }
 
                         }
                         else{

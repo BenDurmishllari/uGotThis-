@@ -10,12 +10,13 @@ public class Task {
                     userName,
                     userId,
                     imageUrl;
+    private String status = "Uncomplete";
     private Timestamp timeAdded;
 
     // empty constructor mandatory for firebase
     public Task() {}
 
-    public Task(String taskDocumentId, String title, String description, String userName, String userId, String imageUrl, Timestamp timeAdded)
+    public Task(String taskDocumentId, String title, String description, String userName, String userId, String imageUrl, String status,Timestamp timeAdded)
     {
         this.taskDocumentId = taskDocumentId;
         this.title = title;
@@ -23,6 +24,7 @@ public class Task {
         this.userName = userName;
         this.userId = userId;
         this.imageUrl = imageUrl;
+        this.status = status;
         this.timeAdded = timeAdded;
     }
 
@@ -47,5 +49,7 @@ public class Task {
     public String getDescription() { return description; }
     public void setDescription(String description) { this.description = description; }
 
+    public String getStatus() { return status; }
 
+    public void setStatus(String status) { this.status = status; }
 }

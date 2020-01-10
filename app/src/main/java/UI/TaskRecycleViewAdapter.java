@@ -110,6 +110,7 @@ public class TaskRecycleViewAdapter extends RecyclerView.Adapter<TaskRecycleView
 
         holder.title.setText(task.getTitle());
         holder.description.setText(task.getDescription());
+        holder.status.setText(task.getStatus());
         imageUrl = task.getImageUrl();
 
         String timeAgo = (String) DateUtils.getRelativeTimeSpanString(task.getTimeAdded().getSeconds() * 1000);
@@ -132,7 +133,8 @@ public class TaskRecycleViewAdapter extends RecyclerView.Adapter<TaskRecycleView
         public TextView title,
                         description,
                         dateAdded,
-                        name;
+                        name,
+                        status;
         public ImageView image;
         String  userId,
                 username;
@@ -147,6 +149,7 @@ public class TaskRecycleViewAdapter extends RecyclerView.Adapter<TaskRecycleView
             dateAdded = itemView.findViewById(R.id.lblRowListTaskTimeStamp);
             image = itemView.findViewById(R.id.ImageViewRowListTasks);
             itemsCardView = itemView.findViewById(R.id.cardListTask);
+            status = itemView.findViewById(R.id.lblStatus);
         }
     }
 }

@@ -19,22 +19,45 @@
             android:layout_weight="50"
             android:weightSum="100">
 
-            <ImageView
-                android:id="@+id/ImageViewRowListTasks"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="match_parent"
                 android:layout_weight="50"
-                android:src="@drawable/row_list_view" />
+                android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/lblRowListTaskTitle"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_weight="50"
-                android:gravity="center"
-                android:text="TextViewtitle"
-                android:textAlignment="center"
-                android:textStyle="bold" />
+                <ImageView
+                    android:id="@+id/ImageViewRowListTasks"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:layout_weight="50"
+                    android:src="@drawable/row_list_view" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="50"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/lblRowListTaskTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="44dp"
+                        android:layout_weight="50"
+                        android:gravity="center"
+                        android:text="TextViewtitle"
+                        android:textAlignment="center"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/lblStatus"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="50"
+                        android:text="TextView"
+                        android:textAlignment="center"/>
+                </LinearLayout>
+            </LinearLayout>
+
         </LinearLayout>
 
         <LinearLayout
@@ -53,9 +76,10 @@
             <TextView
                 android:id="@+id/lblRowListTaskDescription"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_height="39dp"
                 android:gravity="center"
-                android:text="TextView3" />
+                android:text="TextView3"
+                android:textStyle="bold" />
         </LinearLayout>
     </LinearLayout>
 

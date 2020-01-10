@@ -119,6 +119,7 @@
                         android:paddingLeft="15dp"
                         android:paddingRight="15dp"
                         android:background="@drawable/txt_corners"
+                        android:inputType="textPassword"
                         android:drawableEnd="@drawable/password_icon_24dp"/>
 
 

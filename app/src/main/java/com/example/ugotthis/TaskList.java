@@ -48,7 +48,9 @@ import com.google.firebase.storage.StorageReference;
 import static android.content.ContentValues.TAG;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import Model.Task;
 import UI.TaskRecycleViewAdapter;
@@ -68,6 +70,8 @@ public class TaskList extends AppCompatActivity {
 
     private String currentUserName;
     private String currentUserId;
+
+
 
     // Firebase attributes
     private FirebaseAuth firebaseAuth;
@@ -94,8 +98,6 @@ public class TaskList extends AppCompatActivity {
     public DocumentReference docRef;
 
     public int TaskPosition;
-
-
 
 
     @Override
@@ -171,7 +173,6 @@ public class TaskList extends AppCompatActivity {
                                     // save the id of the document
                                     task.setTaskDocumentId(tasks.getId());
                                     taskList.add(task);
-
                                 }
                                 catch (Exception e)
                                 {
@@ -187,21 +188,23 @@ public class TaskList extends AppCompatActivity {
 
                                     final Task tasks = taskList.get(taskPosition);
                                     docRef = database.collection("Task").document(tasks.getTaskDocumentId());
+                                    final String status = "Complete";
 
                                     alertDialog = new AlertDialog.Builder(TaskList.this)
                                             .setIcon(android.R.drawable.ic_menu_edit)
                                             .setTitle("Manage Your Task" + " " + TaskApi.getInstance().getUsername())
                                             .setMessage("Are you sure?")
-                                            .setPositiveButton(Html.fromHtml("<font color = '#0083FF'> Update Task </font>"),
+                                            .setPositiveButton(Html.fromHtml("<font color = '#0083FF'> Update </font>"),
                                                     new DialogInterface.OnClickListener()
                                                     {
                                                         @Override
                                                         public void onClick(DialogInterface dialog, int which)
                                                         {
                                                             startActivity(new Intent(TaskList.this, Edit_activity.class));
+                                                            taskList.clear();
                                                         }
                                                     })
-                                            .setNegativeButton(Html.fromHtml("<font color = '#ff0000'> Delete Task </font>"),
+                                            .setNegativeButton(Html.fromHtml("<font color = '#ff0000'> Delete </font>"),
                                                     new DialogInterface.OnClickListener()
                                                     {
                                                         @Override
@@ -225,6 +228,34 @@ public class TaskList extends AppCompatActivity {
                                                             }
 
 
+                                                        }
+                                                    })
+                                            .setNeutralButton(Html.fromHtml("<font color = '#2bdb2e'> Complete? </font>"),
+                                                    new DialogInterface.OnClickListener() {
+                                                        @Override
+                                                        public void onClick(DialogInterface dialog, int which)
+                                                        {
+                                                            Map<String, Object> upMap = new HashMap<>();
+                                                            upMap.put("status", status);
+
+                                                            docRef.update(upMap).addOnSuccessListener(new OnSuccessListener<Void>()
+                                                            {
+                                                                @Override
+                                                                public void onSuccess(Void aVoid)
+                                                                {
+                                                                    taskRecycleViewAdapter.notifyDataSetChanged();
+                                                                    Toast.makeText(TaskList.this, "Your status has been changed", Toast.LENGTH_SHORT).show();
+                                                                    startActivity(new Intent(TaskList.this, CreateTask_activity.class));
+                                                                    taskList.clear();
+                                                                }
+                                                            }).addOnFailureListener(new OnFailureListener() {
+                                                                @Override
+                                                                public void onFailure(@NonNull Exception e)
+                                                                {
+                                                                    Toast.makeText(TaskList.this, "Error, Try again!", Toast.LENGTH_SHORT).show();
+                                                                }
+                                                            });
+                                                            taskRecycleViewAdapter.notifyDataSetChanged();
                                                         }
                                                     })
                                             .show();
